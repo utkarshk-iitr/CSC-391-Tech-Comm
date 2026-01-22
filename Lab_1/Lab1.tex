@@ -1,0 +1,104 @@
+\documentclass{article}
+\usepackage{graphicx} 
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}
+\usepackage{multirow}
+\usepackage[margin=1in]{geometry}
+% \renewcommand{\thetheorem}{\arabic{theorem}.}
+
+\title{Lab 1 - Technical Communication}
+\author{UTKARSH KUMAR 23114101}
+\date{January 2026}
+
+\begin{document}
+\setlength{\parindent}{0pt}
+\maketitle
+
+\begin{enumerate}
+
+\item
+
+Let $h \in \mathbf{H}$. Define a indicator random variable $X_{i,j}$ such that
+\begin{center}
+$X_{i,j}$ = \begin{cases}
+    \text{1,} & \text{if $h(k_{i})=h(k_{j})$} \\
+    \text{0,} & \text{o.w.}
+\end{cases}
+\end{center}
+Let the length of chain at index $h(k_{i})$ be a random variable $X_{i}$. Then we have
+\begin{center}
+    $X_{i}$ = $\sum\limits_{j=0}^{n-1} X_{i,j}$
+\end{center}
+The expected length of chain at index $h(k_{i})$ is then given by
+\begin{align*}
+    \underset{h\in\mathbf{H}}{E}\bigl(X_{i}\bigr) &= \underset{h\in\mathbf{H}}{E}\bigl(\sum\limits_{j=0}^{n-1} X_{i,j}\bigr)\\
+    &= 1 + \ \underset{h\in\mathbf{H}}{E}\bigl(\sum\limits_{j=0,j\not=i}^{n-1} X_{i,j}\bigr)\\
+    &= 1 + \sum\limits_{j=0,j\not=i}^{n-1} 1 \cdot \underset{h\in\mathbf{H}}{\Pr}(h(k_{i})=h(k_{j}))+0 \cdot\underset{h\in\mathbf{H}}{\Pr}(h(k_{i})\not=h(k_{j}))\\
+    &= 1+ \sum\limits_{j=0,j\not=i}^{n-1} \frac{1}{m}\\
+    &= 1+\frac{n-1}{m}
+\end{align*}
+Since $m=\Theta(n) \implies \alpha = O(1) \implies$ expected length of chain at index $h(k_{i})$ is constant.
+
+\item
+The construction of the \textbf{dot product} family of hash function is defined as follows.
+
+\begin{enumerate}[label=(\alph*), leftmargin=2.5em]
+    \item Let $|U| = m^r$ for some prime $m$and positive integer $r \ge2$.
+    \item For a key $k \in U$, view $k$ in base $m$ representation. So, we have 
+        \begin{center}
+            $k = (k_{0},k_{1},...,k_{r-1})$
+        \end{center}
+    where $k_{i} \in \{0,1,...,m-1\}$.
+    \item Let $a = (a_{0},a_{1},...,a_{r-1})$ where $a_{i}$'s are picked uniformly at random from $\{0,1,...,m-1\}$.
+    \item Define $h_{a}(k):U \rightarrow \{0,1,...,m-1\}$ such that
+        \begin{center}
+            $h_a(k) = \sum\limits_{i=0}^{r-1} a_{i}k_{i} \bmod m.$
+        \end{center}
+    \item $\mathbf{H} = \{h_{a}\}$
+\end{enumerate}
+
+\item
+\begin{theorem}
+    The probability of a collision in the dot product family of hash functions is $\frac{1}{m}$.
+\end{theorem}
+
+\begin{proof}
+    Let $x = \{x_{0},x_{1},...,x_{r-1}\}$ and $y = \{y_{0},y_{1},...,y_{r-1}\}$ be two keys such that $x \not = y$. Then they differ in at least one digit position. Without loss of generality assume that $x_0 \not = y_0$. Then we have
+
+    \begin{align*}
+        \underset{h\in\mathbf{H}}{\Pr}(h(x)=h(y)) &= \underset{h\in\mathbf{H}}{\Pr}\bigl(\sum\limits_{i=0}^{r-1} a_{i}x_{i}\bmod  m=\sum\limits_{i=0}^{r-1} a_{i}y_{i} \bmod m\bigr)\\
+        &= \underset{h\in\mathbf{H}}{\Pr}\bigl(\sum\limits_{i=0}^{r-1} a_{i}x_{i}\ \equiv \sum\limits_{i=0}^{r-1} a_{i}y_{i} \bmod m\bigr)\\
+        &= \underset{h\in\mathbf{H}}{\Pr}\bigl(a_0(x_0-y_0) + \sum\limits_{i=1}^{r-1} a_{i}(x_{i}-y_i)\ \equiv 0 \bmod m\bigr)\\
+        &= \underset{h\in\mathbf{H}}{\Pr}\bigl(a_0 \equiv (x_0-y_0)^{-1} \cdot \sum\limits_{i=1}^{r-1} a_{i}(x_{i}-y_i)\bmod{m}\bigr)\\
+        &= \frac{1}{m}
+    \end{align*}
+
+    Since $x_0 \not = y_0$ and $m$ is prime, inverse of $x_0-y_0$ exists.
+\end{proof}
+
+\item
+
+In Table 1. we show how to draw a table with \LaTeX.
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{c|ccccc}
+\hline
+\multicolumn{1}{c|}{Row $i$} & \multicolumn{5}{c}{Columns}\\
+\cline{2-6}
+\multicolumn{1}{c|}{} & $X^i_0$& $X^i_1$& $X^i_2$& $X^i_3$& $X^i_4$\\
+\hline
+2&2&1&1&2&2\\
+3&3&3&4&4&3\\
+4&7&8&7&7&6\\
+5&8&8&13&14&15\\
+6&45&45&32&31&29\\
+\hline
+\end{tabular}
+\caption{Demo of the table.}
+\end{table}
+\end{enumerate}
+\end{document}
