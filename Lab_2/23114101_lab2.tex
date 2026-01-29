@@ -1,0 +1,150 @@
+\documentclass{article}
+\usepackage{graphicx} 
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{booktabs}
+\usepackage{multirow}
+
+\usepackage[margin=1in]{geometry}
+
+% \usepackage[ruled, vlined]{algorithm2e}
+\usepackage{amsmath}
+
+\title{Lab 2 - Technical Communication}
+\author{UTKARSH KUMAR 23114101}
+\date{January 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+    \item 
+    
+The SNOW-V cipher is used for encrypting voice communications in 4G/5G networks. In Algorithm 1, we define the secret key and the initialization vector loading phase of the SNOW-V stream cipher.
+
+\begin{algorithm}
+\caption{The key and IV setup phase}
+
+\begin{algorithmic}[1]
+\Procedure{keyiv\_setup}{$K$, $IV$, is\_aead\_mode}
+    \State $(a_{15},a_{14},\ldots,a_{8}) \gets (k_{7},k_{6},\ldots,k_{0})$ \Comment{$K = (k_{7},k_{6},\ldots,k_{0})$}
+    \State $(a_{7},a_{6},\ldots,a_{0}) \gets (iv_{7},iv_{6},\ldots,iv_{0})$ \Comment{$IV = (iv_{7},iv_{6},\ldots,iv_{0})$}
+    \State $(b_{15},b_{14},\ldots,b_{8}) \gets (k_{15},k_{14},\ldots,k_{8})$
+    \State $(b_{7},b_{6},\ldots,b_{0}) \gets (0,0,\ldots,0)$
+    \State $(R_{1},R_{2},R_{3}) \gets 0,0,0$
+    \For{$t=1\ldots16$}
+    \State $T_1 \gets (b_{15},b_{14},\ldots,b_{8})$
+    \State $z \gets (R_1 \boxplus_{32} T_1) \oplus R_2$
+    \State \Call{fsm\_update()}{}
+    \State \Call{lfsr\_update()}{}
+    \State $(a_{15},a_{14},\ldots,a_{8}) \gets (a_{15},a_{14},\ldots,a_{8}) \oplus z$
+
+    \If{$t=15$}
+        \State $R_1 \gets R_1 \oplus (k_{7},k_{6},\ldots,k_{0})$
+    \EndIf
+    \If{$t=16$}
+        \State $R_1 \gets R_1 \oplus (k_{15},k_{14},\ldots,k_{8})$
+    \EndIf
+    \EndFor
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\item In ques2.tex file
+\end{enumerate}
+
+\newpage
+\section{Formatting Tables} 
+
+Write \LaTeX \ code to generate the following tables:
+
+
+\begin{enumerate}
+    \item \textbf{Table 1}
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Category} & \textbf{Subcategory 1} & \textbf{Subcategory 2} & \textbf{Details} \\ \hline
+Algebra & Linear Equations & Quadratic Equations & Basic Algebra Concepts \\ \hline
+Calculus & Differentiation & Integration & Fundamental Calculus \\ \hline
+Geometry & Circles & Triangles & Euclidean Geometry \\ \hline
+Programming & Variables & Control Structures & Basics of Coding \\ \hline
+\end{tabular}
+\caption{Simple LaTeX table with text and strings}
+\label{tab:table1}
+\end{table}
+
+\item \textbf{Table 2}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{llr}
+\toprule
+\multicolumn{2}{c}{Topic} \\ 
+\cmidrule(lr){1-2}
+Subject & Description & Key Concept \\
+\midrule
+Algebra   & Linear Equations     & Slope and Intercept \\
+          & Quadratic Equations  & Parabolas and Roots \\
+Calculus  & Differentiation      & Derivatives and Slopes \\
+          & Integration          & Area Under the Curve \\
+Geometry  & Euclidean Geometry   & Angles and Triangles \\
+\bottomrule
+\end{tabular}
+\caption{Mathematical Topics and Their Key Concepts}
+\label{tab:table2}
+\end{table}
+
+\item \textbf{Table 3}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lccr}
+\toprule
+\multirow{2}{*}{\textbf{Category}} & \multicolumn{2}{c}{\textbf{Values}} & \multirow{2}{*}{\textbf{Total}} \\
+\cmidrule(lr){2-3}
+& \textbf{Math Symbol} & \textbf{Numeric} & \\
+\midrule
+\multirow{2}{*}{Algebra} & $\alpha + \beta$ & 10 & \multirow{2}{*}{$10 + 7 = 17$} \\
+& $x^2 + y^2$ & 7 & \\
+\midrule
+\multirow{2}{*}{Calculus} & $\int_a^b f(x)\,dx$ & 15 & \multirow{2}{*}{$15 + 9 = 24$} \\
+& $\lim_{x\to 0}\frac{\sin x}{x}$ & 9 & \\
+\midrule
+\multirow{2}{*}{Geometry} & $\pi r^2$ & 20 & \multirow{2}{*}{$20 + 25 = 45$} \\
+& $\frac{1}{2}bh$ & 25 & \\
+\bottomrule
+\end{tabular}
+\caption{Incorporating math symbols}
+\label{tab:table3}
+\end{table}
+
+\end{enumerate}
+
+\newpage
+\section{Bibliography and Referencing}
+
+\subsection{Algebra and Its Applications}
+
+Algebra forms the foundation of many mathematical theories and applications. As seen in Table~1, algebraic topics like Linear Equations and Quadratic Equations, discussed in \textit{Linear Algebra and Its Applications} by Gilbert Strang~\cite{strang}, are essential in understanding basic algebra concepts. 
+
+Furthermore, Table~2 elaborates on the key concepts associated with these algebraic topics, such as ``Slope and Intercept'' for Linear Equations, which are crucial for solving and graphing linear relationships.
+
+\subsection{Calculus in Modern Engineering}
+
+Calculus is a critical area of study, particularly for understanding change and motion in dynamic systems. Table~1 outlines the fundamental topics in calculus, such as Differentiation and Integration, as detailed in \textit{The Calculus Lifesaver} by Adrian Banner~\cite{banner}. 
+
+In Table~2, we further explore these concepts, where ``Derivatives and Slopes'' and ``Area Under the Curve'' are identified as key concepts in understanding the applications of calculus in various fields, including physics and engineering.
+
+\subsection{Geometry in Theoretical and Applied Mathematics}
+
+Geometry, as detailed in Table~1, includes topics like Circles, Triangles, and Euclidean Geometry, which are foundational to understanding spatial relationships and properties of shapes. 
+
+The importance of geometry is further illustrated in Table~3, where mathematical symbols and numeric values are used to represent geometric concepts. For instance, the area of a circle, represented by $\pi r^2$, and the area of a triangle, represented by $\frac{1}{2}bh$, highlight the practical applications of these geometric principles in fields such as architecture and engineering. These principles are also critical in computer graphics and vision, as explored in research articles such as ``Deep Residual Learning for Image Recognition'' by He et al.~\cite{he}, and modern approaches like ``Attention Is All You Need'' by Vaswani et al.~\cite{vaswani}, which employ geometric transformations and spatial understanding in their algorithms.
+
+\bibliographystyle{plain}
+\bibliography{23114101_lab2}
+\end{document}

@@ -1,0 +1,54 @@
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\usepackage{graphicx}
+\usepackage[margin=3.5cm]{geometry}
+\usepackage{amsmath}
+
+\title{Lab 2 - Technical Communication}
+\author{UTKARSH KUMAR 23114101}
+\date{January 2026}
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item 
+    
+The SNOW-V cipher is used for encrypting voice communications in 4G/5G networks. In Algorithm 1, we define the secret key and the initialization vector loading phase of the SNOW-V stream cipher.
+
+\begin{algorithm}[H]
+\caption{The key and IV setup phase}
+
+\SetKwProg{Proc}{procedure}{:}{end procedure}
+\Proc{\textsc{keyiv\_setup}$(K,\ IV,\ is\_aead\_mode)$}{
+
+$(a_{15},a_{14},\ldots,a_{8}) \gets (k_{7},k_{6},\ldots,k_{0})$  \hfill $\triangleright\ K=(k_7,k_6,\ldots,k_0)$ \\
+$(a_{7},a_{6},\ldots,a_{0}) \gets (iv_{7},iv_{6},\ldots,iv_{0})$ \hfill $\triangleright\ IV=(iv_7,iv_6,\ldots,iv_0)$ \\
+
+$(b_{15},b_{14},\ldots,b_{8}) \gets (k_{15},k_{14},\ldots,k_{8})$ \\
+$(b_{7},b_{6},\ldots,b_{0}) \gets (0,0,\ldots,0)$ \\
+$R_1, R_2, R_3 \gets 0,0,0$ \\ 
+
+\For{$t= 1 \ldots 16$}{
+    $T_1 \gets (b_{15},b_{14},\ldots,b_{8})$ \\
+    $z \gets (R_1 \boxplus_{32} T_1) \oplus R_2$ \\
+    \textsc{fsm\_update()} \\
+    \textsc{lfsr\_update()} \\
+    $(a_{15},a_{14},\ldots,a_{8}) \gets (a_{15},a_{14},\ldots,a_{8}) \oplus z$ \\
+
+    \If{$t = 15$}{
+        $R_1 \gets R_1 \oplus (k_{7},k_{6},\ldots,k_{0})$\\
+        \textbf{end if}
+    }
+
+    \If{$t = 16$}{
+        $R_1 \gets R_1 \oplus (k_{15},k_{14},\ldots,k_{8})$\\
+        \textbf{end if}
+    }
+    \textbf{end for}
+}
+\textbf{end procedure}
+}
+\end{algorithm}
+\end{enumerate}
+
+\end{document}
