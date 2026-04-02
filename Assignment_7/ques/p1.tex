@@ -1,0 +1,100 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+\usetikzlibrary{crypto.symbols}
+\usetikzlibrary{shapes.geometric}
+
+
+\newcommand{\com}{}    % need mathtt version of letter F
+
+\begin{document}
+	
+	\begin{tikzpicture}
+		\tikzstyle{register} = []     %  Add definition of a rectangle register with width 1.5 cm, height 0.75 cm and centered text alignment 
+		
+		\node(a0)[draw,register] at (0,0){$X^i_0$};
+		\node [draw,register] at (2,0){$X^i_1$};
+		\node(c0)[draw,register] at (4,0){$X^i_2$};
+		\node(d0)[draw,register] at (6,0){$X^_3$};
+		\node [draw,register] at (8,0){$X^i_4$};
+		
+		\draw[shift={($(a0) + (0, -0.5)$)}](-0.08,-0.08)--(0.08,0.08);
+		\node  at ($(a0) + (0.4, -0.55)$){\footnotesize 64};
+		
+		\draw[shift={($(b0) + (0, -0.5)$)}](-0.08,-0.08)--(0.08,0.08);
+		\node  at ($(b0) + (0.4, -0.55)$){\footnotesize 64};
+		
+		\draw[shift={($(c0) + (0, 1)$)}](-3,-0.08)--(0.08,0.08);
+		\node  at ($(c0) + (0.4, -0.55)$){\footnotesize 64};
+		
+		\draw[shift={($(d0) + (0, -0.5)$)}](-0.08,-0.08)--(0.08,0.08);
+		\node  at ($(d0) + (0.4, -0.55)$){64};
+		
+		\draw[shift={($(e0) + (0, -0.5)$)}](-0.08,-0.08)--(0.08,0.08);
+		\node  at ($(e0) + (0.4, -0.55)$){\footnotesize 64};
+		
+		\node(fa)[draw, register, scale = 0.8] at (0,-1.3){ \com};
+		\node(fc)[draw, register, scale = 0.8] at (4,-1.3){ \com};
+		\node[draw, register, scale = 0.8] at (8,-1.3){ \com};
+		
+		\draw[thick,-latex]($(fa)+(1.15,0)$)--($(fa)+(0.6,0)$);
+		\node at ($(fa)+(1.42,0)$){\footnotesize $rc_{0}^$};
+		\draw[thick,-latex]($(fc)+(1.15,0)$)--($(fc)+(0.6,0)$);
+		\node at ($(fc)+(1.42,0)$){\footnotesize $rc_{1}^i$};
+		\draw[thick,-latex]($(fe)+(1.15,0)$)--($(fe)+(0.6,0)$);
+		\node at ($(fe)+(1.42,0)$){\footnotesize $rc_^i$};
+		
+		\node(xorb)[XOR, scale=0.65] at (2,-1.85){};
+		\node(xor)[XOR, scale=0.65] at (6,-1.85){};
+		\node(xore)[XOR, scale=0.65] at (8,-2.55){};
+		
+		\draw[dashed, -latex](9.25,-2.55)--(xore);
+		
+		
+		\node(xorb1)[XOR, scale=0.65] at (2,-3.25){};
+		\node(xord1)[XOR, scale=0.65] at (6,-3.25){};
+		\node(xore1)[XOR, scale=0.65] at (8,-3.25){};
+		
+		\draw[thick,-latex] (1, -3.25)--(xorb1);
+		\node at (1, -3) {\footnotesize $1^{56}||c_{0}^i$};
+		\draw[thick,-latex] (5, -3.25)--(xord1);
+		\node at (7, -3) {\footnotesize $1^{56}c_{1}^i$};
+		\draw[thick,-latex] (7, -3.25)--(xore1);
+		\node at (7, -3) { $1^{56}||c_{2}^i$};
+		
+		
+		
+		\node(a1)[draw,register] at (0,-6){$X^{i+1}_0$};
+		\node(b1)[draw,register] at (2,-6){$X^{i+1}_1$};
+		\node(c1)[draw,register] at (10,-6){$X^{i+1}_2$};
+		\node(d1)[draw,register] at (6,-4){$X^{i+1}_3$};
+		\node(e1)[draw,register] at (8,-6){$X^{i+1}_4$};
+		
+		\draw[thick,-latex](a0)--(fa);
+		\draw[thick,-latex](c0)--(fc);
+		\draw[thick,-latex](e0)--(fe);
+		
+		\draw[thick,-latex](b0)--(xorb);
+		\draw[thick,-latex](d0)--(xord);
+		
+		\draw[thick,-latex](fc)|-(xorb);
+		\draw[thick,-latex](fe)|-(xord);
+		
+		\draw[thick,-latex](xorb)--(xorb1);
+		\draw[thick,-latex](xord)--(xord1);
+		\draw[thick,-latex](fe)--(xore);
+		\draw[thick,-latex](xore)--(xore1);
+		
+		\draw[thick,-latex](fa)-+(0,-4.25)--(4,-5)--(c1);
+		\draw[thick,-latex](xorb1)-+(2,-4.25)--(8,-5)-|(e1);
+		\draw[thick,-latex](fc)--(4,-4.25)--(2,-5)--(b1);
+		\draw[thick,-latex](xord1)--(6,-4.25)--(0,-5)-|(a1);
+		\draw[thick,-latex](xore1)--(8,-4.25)--(6,-5)-|(d1);
+		
+	\end{tikzpicture} 
+	
+	
+	
+\end{document}
