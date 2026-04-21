@@ -1,0 +1,66 @@
+\chapter{Introduction}
+\label{ch:introduction}
+
+Cybersecurity is no longer a niche technical concern. It directly affects daily life through
+banking, communication, healthcare, transportation, and digital public services.
+Modern attacks are targeted, persistent, and increasingly systemic because software systems
+are deeply connected through cloud services, CI/CD pipelines, open-source dependencies,
+and distributed teams.
+
+This report presents a broad overview of contemporary cyber threats and then focuses on
+software supply chain attacks as the central theme. The focus is motivated by recent incidents
+where compromise of a trusted upstream component propagated silently to many downstream
+consumers.
+
+\section{Modern Cyber Threat Landscape}
+
+The most common operational threat classes discussed in this report are malware/ransomware,
+phishing and social engineering, denial-of-service (DDoS), insider threats, and software supply
+chain attacks. A concise summary is provided in \cref{tab:threat-overview}.
+
+\begin{table}[htbp]
+\centering
+\caption{High-level threat classes and representative mitigations.}
+\label{tab:threat-overview}
+\begin{tabular}{p{0.26\textwidth} p{0.30\textwidth} p{0.34\textwidth}}
+\toprule
+\textbf{Threat Class} & \textbf{Typical Attack Vector} & \textbf{Representative Mitigations} \\
+\midrule
+Malware and Ransomware & Malicious payload execution for encryption, theft, or disruption & Endpoint protection, offline backups, rapid patching \\
+Phishing and Social Engineering & Deceptive communication that steals credentials or installs malware & MFA, secure email gateway, user awareness \\
+DDoS & Flooding network/service resources to exhaust availability & Traffic filtering, rate limiting, redundancy \\
+Insider Threats & Misuse of legitimate internal access & Least privilege, monitoring, segregation of duties \\
+Supply Chain Attack & Compromise of trusted package, dependency, or build path & Provenance checks, signed releases, continuous vetting \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Scope and Focus}
+
+The broad threat overview is narrowed to supply chain attacks for three reasons:
+
+\begin{enumerate}[label=(\roman*)]
+\item the trust boundary in dependency ecosystems is often implicit,
+\item one upstream compromise can impact many organizations,
+\item detection and response are difficult when malicious behavior is hidden in normal update paths.
+\end{enumerate}
+
+\section{Key Contributions of This Report}
+
+The main contributions are:
+
+\begin{itemize}
+\item a structured overview of modern cyber threats and mitigations;
+\item a focused case study of the XZ Utils incident (2024) and its attack path;
+\item synthesis of related work on package ecosystem security and dependency confusion;
+\item in-depth discussion of existing and proposed defenses, with explicit limitations and future directions.
+\end{itemize}
+
+\section{Report Organization}
+
+\Cref{ch:background} introduces background, core concepts, and related work.
+\Cref{ch:casestudy} presents the XZ backdoor case and formal problem statement.
+\Cref{ch:solutions} provides in-depth discussion of existing and proposed solutions.
+\Cref{ch:conclusion} summarizes conclusions and outlines future work.
+
+

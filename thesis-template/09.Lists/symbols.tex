@@ -1,0 +1,30 @@
+%----------------------------------------------------------------------------------------
+%	SYMBOLS
+%----------------------------------------------------------------------------------------
+
+\begin{symbols}{lll} % Include a list of Symbols (a three column table)
+
+$G=(V,E)$ & Dependency graph of package ecosystem & -- \\
+$V$ & Set of package nodes & -- \\
+$E$ & Set of dependency edges & -- \\
+$d$ & A dependency in the project dependency set & -- \\
+$P$ & Security policy rule set & -- \\
+$T$ & Trusted source and provenance map & -- \\
+
+\addlinespace % Gap to separate the Roman symbols from the Greek
+
+$\rho(d)$ & Risk score assigned to dependency $d$ & -- \\
+
+\end{symbols}
+\hypersetup{linkcolor=red}
+
+%----------------------------------------------------------------------------------------
+%	MATH SYMBOLS
+%----------------------------------------------------------------------------------------
+\renewcommand\arraystretch{1.5}
+\begin{mathsymbols}{r |p{0.8\linewidth}} % Include a list of Symbols (a three column table)
+
+$d \in D$ & Dependency $d$ belongs to the complete dependency set $D$.\\
+$G=(V,E)$ & A dependency relation exists between two packages if an edge is present in $E$.\\
+$\rho(d) \geq \tau$ & A dependency is quarantined when its risk score exceeds threshold $\tau$.\\
+\end{mathsymbols}

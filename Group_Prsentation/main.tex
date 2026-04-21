@@ -1,0 +1,272 @@
+\documentclass[10pt, aspectratio=169]{beamer}
+
+\usetheme[
+    progressbar=none,
+    sectionpage=none,
+    numbering=fraction,
+    background=light
+]{metropolis}
+
+\usepackage{fontspec}
+\usepackage{array} % in preamble
+
+\setsansfont{Ubuntu-Regular.ttf}[
+    BoldFont = Ubuntu-Bold.ttf,
+    ItalicFont = Ubuntu-Italic.ttf
+]
+
+\setmonofont{UbuntuMono-Regular.ttf}[
+    BoldFont = UbuntuMono-Bold.ttf
+]
+
+\usepackage{fontawesome5}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{etoolbox}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,shapes.geometric,fit}
+\usepackage{url}
+
+\definecolor{BgLight}{HTML}{FAFAFA}
+\definecolor{TextSlate}{HTML}{222831}
+\definecolor{UbuntuGreen}{HTML}{39FF14}
+\definecolor{KaliBlue}{HTML}{0096FF}
+\definecolor{AlertRed}{HTML}{DC2626}
+
+\setbeamercolor{normal text}{fg=TextSlate, bg=BgLight} 
+\setbeamercolor{alerted text}{fg=AlertRed}
+\setbeamercolor{example text}{fg=UbuntuGreen}
+\setbeamercolor{frametitle}{bg=TextSlate, fg=BgLight}
+\setbeamercolor{progress bar}{fg=KaliBlue, bg=TextSlate!20}
+\setbeamercolor{title separator}{fg=KaliBlue}
+\setbeamercolor{block title}{bg=TextSlate!10, fg=KaliBlue}
+\setbeamercolor{block title alerted}{bg=AlertRed!10, fg=AlertRed}
+\setbeamercolor{block title example}{bg=UbuntuGreen!10, fg=UbuntuGreen}
+
+\setbeamercolor{footline main}{fg=BgLight}
+\setbeamercolor{footline border}{bg=UbuntuGreen}
+\setbeamercolor{footline progress done}{bg=TextSlate}
+\setbeamercolor{footline progress todo}{bg=KaliBlue!70!black}
+\setbeamerfont{footline}{size=\scriptsize,series=\bfseries}
+
+\setbeamertemplate{footline}{%
+    \leavevmode%
+    \def\totf{\inserttotalframenumber}%
+    \ifx\totf\empty\def\totf{1}\fi%
+    \ifnum\totf=0 \def\totf{1}\fi%
+    \dimen0=\dimexpr\paperwidth*\insertframenumber/\totf\relax%
+    \dimen1=\dimexpr\paperwidth-\dimen0\relax%
+    \hbox{%
+        \usebeamercolor{footline progress done}\color{bg}\vrule width\dimen0 height2.5ex depth0.5ex%
+        \usebeamercolor{footline progress todo}\color{bg}\vrule width\dimen1 height2.5ex depth0.5ex%
+    }%
+    \vskip-3.5ex%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.0ex,leftskip=2ex,rightskip=2ex]{footline main}%
+        \usebeamerfont{footline}\color{fg}%
+        Group 4\hspace{0.8em}|\hspace{0.8em}Cyber Threats and their Mitigations \hfill\insertshortdate\hspace{0.8em}|\hspace{0.8em}\insertframenumber/\inserttotalframenumber
+    \end{beamercolorbox}%
+}
+
+% Subtle, formal transition effect between frames.
+\AtBeginEnvironment{frame}{\transfade[duration=0.12]}
+
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip%
+  \begin{beamercolorbox}[wd=\paperwidth,sep=1.2ex]{frametitle}
+    \texttt{\textcolor{UbuntuGreen}{ppt@techcomm}:\textcolor{KaliBlue}{\textasciitilde}\$} \insertframetitle%
+  \end{beamercolorbox}%
+}
+
+\title[Cyber]{\LARGE \texttt{\faTerminal\ Cyber Threats and their Mitigations}}
+\subtitle{Technical Communication Presentation}
+\author[Group 4]{
+    \textbf{Group 4:} \\
+    \begin{tabular}{l l}
+    Adesh Palkar & 23114004 \\
+    Nisarg Prajapati & 23114073 \\
+    Utkarsh Kumar & 23114101 \\
+    Tanay Kapadia & 23323044 \\
+    Parth Baranwal & 23114076 \\
+    \end{tabular}
+}
+
+\titlegraphic{\vspace{3.5cm}\flushright\includegraphics[width=9cm]{title.png}}
+
+\date[Apr 2026]{April 16, 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{\texttt{cat Table\_of\_Contents.txt}}
+  \setbeamertemplate{section in toc}[sections numbered]
+  \tableofcontents[hideallsubsections]
+\end{frame}
+
+\section{Overview of Topic}
+
+\section{The Problem Statement}
+
+\section{Related Work}
+
+\section{References}
+
+\begin{frame}{\texttt{cat Related\_Work.txt}}
+
+\textit{\large\textbf{Towards Measuring Supply Chain Attacks on Package Managers for Interpreted Languages}} \hfill --- Ruian Duan et al., NDSS 2021 \cite{duan2021}
+
+{What problem does the paper address?}
+\begin{itemize}
+    \item Modern software heavily depends on third-party packages from registries like PyPI.
+    \item These ecosystems assume implicit trust, which attackers exploit to inject malware.
+\end{itemize}
+
+{What does the paper aim to do?}
+\begin{itemize}
+    \item Provide systematic comparison of security weaknesses in package ecosystems.
+    \item Identify {broken trust assumptions} and structural vulnerabilities enabling attacks.
+    \item Build an automated pipeline (MALOSS) to {detect malicious packages at scale}.
+\end{itemize}
+
+\textit{Move from reactive, case-by-case fixes to a scalable, data-driven analysis of supply chain threats.}
+\vspace{0.5em}
+\hfill {\scriptsize Source: Duan et al.\cite{duan2021}, NDSS 2021 (Introduction, Methodology)}
+
+\end{frame}
+
+\begin{frame}{\texttt{cat Package\_Manager\_Ecosystem.txt}}
+    \begin{center}
+        \includegraphics[width=1\linewidth]{fig_1.png}
+    {\scriptsize Source: Duan et al.\cite{duan2021}, NDSS 2021, Fig. 1.}
+    \end{center}
+    \vspace{-0.4em}
+    \textbf{Flow \& Security Insight}
+    \vspace{-0.3em}
+\begin{itemize}
+    \item Packages flow: developers $\rightarrow$ registries $\rightarrow$ applications $\rightarrow$ users.
+    \item Attacks exploit upstream components such as packages, where trust is assumed.
+    \item Impact spreads downstream across the ecosystem, affecting applications and users.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{\texttt{./MALOSS\_Pipeline.sh}}
+    \begin{columns}[T]
+
+    \begin{column}{0.4\textwidth}
+    \vspace{1.5em}
+    \centering
+    \textbf{MAL}ware detection for \textbf{O}pen \textbf{S}ource \textbf{S}oftware
+    \end{column}
+    
+    \begin{column}{0.6\textwidth}
+    \centering
+    \vspace{-0.5em}
+    \includegraphics[width=\linewidth]{fig_2.png}\\[-1em]
+    {\tiny MALOSS Pipeline, Source: Duan et al.\cite{duan2021}, NDSS 2021, Fig. 4.}
+    \end{column}
+    \end{columns}
+    \vspace{-1.5em}
+    \begin{enumerate}
+        \item \textbf{Metadata analysis:}
+        \begin{itemize}
+            \item Flags suspicious packages using authors, releases, dependencies, and embedded bins.
+            \item Helps detect typosquatting, author mismatch, and links to known malware.
+        \end{itemize}
+
+        \item \textbf{Static analysis:}
+        \begin{itemize}
+            \item Scans source code for risky APIs: network, filesystem, process, and code generation.
+            \item Detects suspicious flows such as \textit{secret file $\rightarrow$ network exfiltration}.
+        \end{itemize}
+
+        \item \textbf{Dynamic analysis:}
+        \begin{itemize}
+            \item Runs packages in Docker sandboxes during install, import, and function execution.
+            \item Traces DNS/IP activity, file access, and process creation using Sysdig.
+        \end{itemize}
+
+        \item \textbf{Human-in-the-loop verification:}
+        \begin{itemize}
+            \item Manual triage verifies flagged packages, confirms malware, and refines heuristic rules.
+            \item Reduces false positives and improves the accuracy of the pipeline iteratively.
+        \end{itemize}
+    \end{enumerate}
+    \vspace{-0.8em}
+    {\scriptsize Source: Duan et al.\cite{duan2021}, NDSS 2021, Sec. III-B and Table III.}
+\end{frame}
+
+\begin{frame}{\texttt{head Key\_Findings.txt}}
+
+
+\begin{columns}[T]
+    \begin{column}{0.6\textwidth}
+\textbf{Key findings from the paper}
+        \begin{itemize}
+            \item MALOSS analyzed \textbf{over 1 million packages} across PyPI, Npm, and RubyGems. 
+            \item It identified \textbf{339 new malicious packages}; \textbf{278} were confirmed and removed by maintainers.
+            \item \textbf{Three} removed packages had \textbf{more than 100K downloads} and received CVEs.
+            \item \textbf{Typosquatting} and \textbf{account compromise} were the most common attack vectors.
+            \item About \textbf{20\%} of malware stayed online for \textbf{over 400 days}, showing slow detection and removal.
+        \end{itemize}
+
+        {\scriptsize Source: Duan et al.\cite{duan2021}, NDSS 2021, Abstract and Sec. IV.}
+    \end{column}
+
+    \begin{column}{0.4\textwidth}
+        \includegraphics[width=\linewidth]{fig_3.png}\\
+    {\scriptsize Source: Duan et al.\cite{duan2021}, NDSS 2021, Fig. 8,9.}
+    \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{\texttt{more Mitigation\_Limitations.txt}}
+
+\small
+\begin{block}{Actionable mitigations}
+\begin{itemize}
+    \item \textbf{Registry maintainers:} enforce MFA, automated vetting, typo detection, and fast advisories.
+    \item \textbf{Package maintainers:} secure infrastructure, restrict access, and use safe workflows.
+    \item \textbf{Developers:} pin dependencies, review install scripts, and treat updates as security events.
+    \item \textbf{Ecosystem response:} notify dependents quickly and control releases of popular packages.
+\end{itemize}
+\end{block}
+
+\begin{block}{Limitations}
+\begin{itemize}
+    \item Static/dynamic analysis may produce false positives and miss hidden behaviors.
+    \item Dynamic analysis depends on execution paths, trigger-based malware can evade detection.
+    \item Large dependency graphs make complete analysis difficult.
+    \item Manual verification is required, limits full automation.
+    \item Attackers can evade detection using obfuscation or delayed execution.
+\end{itemize}
+\end{block}
+
+\vspace{-0.5em}
+{\scriptsize Source: Duan et al.\cite{duan2021}, NDSS 2021, Sec. III-B, Sec. IV and Sec. V.}
+
+\end{frame}
+
+\begin{frame}{tac References.txt}
+\footnotesize
+
+\begin{thebibliography}{9}
+
+\bibitem{duan2021}
+R.~Duan, O.~Alrawi, R.~P.~Kasturi, R.~Elder, B.~Saltaformaggio, and W.~Lee.\\
+\textit{Towards Measuring Supply Chain Attacks on Package Managers for Interpreted Languages}.
+NDSS Symposium, 2021.
+\href{https://dx.doi.org/10.14722/ndss.2021.23055}{DOI Link}
+
+\end{thebibliography}
+
+\end{frame}
+
+\begin{frame}[standout]
+    Session Terminated. \\ \vspace{0.5em}
+    \normalsize Q\&A / Discussion
+\end{frame}
+
+\end{document}
+
+
+

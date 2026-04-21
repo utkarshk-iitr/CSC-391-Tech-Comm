@@ -1,0 +1,72 @@
+\chapter{Case Study and Problem Statement}
+\label{ch:casestudy}
+
+\section*{Declaration of Contributions}
+This chapter was prepared primarily by Nisarg Prajapati.
+Nisarg Prajapati developed the XZ Utils case narrative, attack-path analysis,
+and broader impact discussion. Adesh Palkar and Utkarsh Kumar assisted with
+threat framing and technical interpretation.
+
+\section{Case Study: XZ Utils Backdoor (2024)}
+
+XZ Utils is a widely used compression utility in Linux ecosystems and includes
+the \texttt{liblzma} library used by many software stacks.
+In 2024, malicious code associated with releases 5.6.0 and 5.6.1 raised serious
+concerns due to potential unauthorized access paths in environments linked with
+\texttt{sshd}/OpenSSH \citep{nvd2024cve3094,redhat2024xz}.
+
+\begin{table}[htbp]
+\centering
+\caption{Simplified timeline and implications of the XZ Utils incident.}
+\label{tab:xz-timeline}
+\begin{tabular}{p{0.22\textwidth} p{0.66\textwidth}}
+\toprule
+\textbf{Event} & \textbf{Observation} \\
+\midrule
+Upstream release activity & Malicious behavior was associated with release/build artifacts.
+\\
+Potential integration path & Systems using affected dependency paths could inherit risk transitively.
+\\
+Ecosystem response & Advisories and coordinated mitigation were issued to reduce spread.
+\\
+Security lesson & A trusted low-level dependency can become a high-impact attack surface.
+\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Attack Path and Security Insight}
+
+The attack path can be interpreted as follows:
+
+\begin{enumerate}
+\item compromise is introduced at an upstream package/release stage;
+\item downstream systems consume the package through normal dependency workflows;
+\item malicious behavior is activated in operational contexts where trust is assumed.
+\end{enumerate}
+
+This pattern demonstrates a core insight: in supply chain attacks, \emph{implicit trust}
+in dependency ecosystems can bypass traditional defensive boundaries.
+
+\section{Problem Statement}
+
+\textbf{The widespread blind trust in unverified open-source dependencies exposes organizations
+to devastating software supply chain attacks.}
+
+Technically, this problem appears because:
+
+\begin{itemize}
+\item modern software depends on deep transitive dependency chains;
+\item package adoption is often based on popularity or convenience rather than verified provenance;
+\item release artifact integrity and maintainer-risk checks are inconsistently enforced.
+\end{itemize}
+
+\section{Why This Matters}
+
+A single compromised package can affect many products and organizations across sectors.
+Attack impact propagates from upstream maintainers to downstream applications and then to end users.
+National-level advisories (for example, CISA guidance) reinforce the need for rapid,
+layered defense strategies and coordinated response \citep{cisa2024shieldsup}.
+
+The solution direction is developed in \cref{ch:solutions}, where we compare current controls
+and propose a composite mitigation strategy.
