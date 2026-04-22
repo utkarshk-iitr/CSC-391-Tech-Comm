@@ -1,0 +1,297 @@
+% \usepackage{times} % sets times new roman font
+
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage{etoolbox}
+
+% \usepackage{palatino} % Use the Palatino font by default
+\usepackage{graphicx}
+\usepackage{lmodern}
+
+\usepackage{lineno,amstext,amssymb,bm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+
+\usepackage{mathpazo} % Use the Palatino font by default
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+% maths symbol package
+\usepackage{stmaryrd}
+
+
+% to get jump operator
+\usepackage{multicol}
+% side by side equations
+\usepackage{IEEEtrantools}
+%--------------------------------------------------------------------------------------------------
+%% Code
+%--------------------------------------------------------------------------------------------------
+
+\usepackage{listings}
+
+%New colors defined below
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{blue},
+  numberstyle=\tiny\ttfamily\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\tiny,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  keepspaces=false,
+  numbers=left,
+  numbersep=6pt,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=2
+}
+
+%"mystyle" code listing set
+\lstset{style=mystyle,
+        basicstyle = \ttfamily \footnotesize,
+        basewidth  = {0.5em,0.5em},
+        xleftmargin=0.3cm}
+%--------------------------------------------------------------------------------------------------
+%% bibliography styles
+%--------------------------------------------------------------------------------------------------
+\usepackage{float}
+\usepackage[numbers]{natbib}
+\usepackage[bookmarks=true,colorlinks=true,linkcolor=blue,citecolor=red,backref=page]{hyperref}
+\pdfstringdefDisableCommands{\let\uppercase\relax}
+
+\makeatletter
+\AtBeginDocument{\def\@citecolor{red}}
+\makeatother
+
+\usepackage[nameinlink,capitalize]{cleveref}
+
+% \biboptions{sort&compress}
+%--------------------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------------------------
+%% Algorithm
+%--------------------------------------------------------------------------------------------------
+\usepackage{algorithm, algpseudocode}
+
+\providecommand\algorithmname{algorithm}
+
+\makeatletter
+\newcounter{algorithmicH}% New algorithmic-like hyperref counter
+\let\oldalgorithmic\algorithmic
+\renewcommand{\algorithmic}{%
+  \stepcounter{algorithmicH}% Step counter
+  \oldalgorithmic}% Do what was always done with algorithmic environment
+\renewcommand{\theHALG@line}{ALG@line.\thealgorithmicH.\arabic{ALG@line}}
+\makeatother
+%--------------------------------------------------------------------------------------------------
+%% Publication
+%--------------------------------------------------------------------------------------------------
+\usepackage[resetlabels]{multibib}
+\newcites{pub}{Papers in Refereed Journals}
+\newcites{conf}{National and International Conference Proceedings}
+% \show\bibsection
+
+\thesistitle{Cyber Threats and Their Mitigations: A Study of Software Supply Chain Risks} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
+\author{Group 4} % Your name, this is used in the title page and abstract, print it elsewhere with \authorname
+\supervisor{Course Instructor} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
+\supervisortitle{Technical Communication} % Your supervisor's title, this is used in the title page, print it elsewhere with \suptitle
+\cosupervisor{} % Your co-supervisor name and URL, this is used in the title page and abstract, print it elsewhere with \cosupname
+\cosupervisortitle{} % Your co-supervisor title , this is used in the title page and abstract, print it elsewhere with \cosuptitle
+\degree{Technical Communication Report} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
+\subject{Cybersecurity and Software Supply Chain} % Your subject area, this is not currently used anywhere in the template, print it elsewhere with \subjectname
+\duration{January, 2026 to April, 2026} %The period during which the work was carried outprint it elsewhere with \workduration
+\group{Group 4} % Your research group's name and URL, this is used in the title page, print it elsewhere with \groupname
+\department{{Computer Science and Engineering}} % Your department's name and URL, this is used in the title page and abstract, print it elsewhere with \deptname
+\university{\href{https://www.iitr.ac.in}{Indian Institute of Technology Roorkee}} % Your university's name and URL, this is used in the title page and abstract, print it elsewhere with \univname
+\addresses{Roorkee - 247667 (INDIA)} % Your address, print it elsewhere with \addressname
+\reporttype{Technical Communication Presentation Report} % Could also be (Seminar Report, Dissertation), print it elsewhere with \reptype
+
+\examiner{}
+\keywords{cybersecurity, supply chain attack, XZ Utils, dependency confusion, malware analysis, mitigation} % Keywords for your thesis, this is not currently used anywhere in the template, print it elsewhere with \keywordnames
+
+\AtBeginDocument{
+\hypersetup{pdftitle=\ttitle} % Set the PDF's title to your title
+\hypersetup{pdfauthor=\authorname} % Set the PDF's author to your name
+\hypersetup{pdfkeywords=\keywordnames} % Set the PDF's keywords to your keywords
+}
+
+\newcommand{\disp}{\boldsymbol{u}}
+\newcommand{\dmg}{\theta}
+\newcommand{\xvec}{\boldsymbol{x}}
+\newcommand{\straint}{\boldsymbol{\epsilon}}
+\newcommand{\stresst}{\boldsymbol{\sigma}}
+
+\DeclareDocumentCommand\dpdv{}{\displaystyle\partialderivative}
+% For bigger size of partial dervatives inside a matrix
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
+
+\newcommand{\ddfrac}[2]{\ensuremath{\frac{\displaystyle #1}{\displaystyle #2}}}
+
+\begin{document}
+\newgeometry{left=3.0cm,right=3.0cm,top=3.0cm,bottom=3.0cm}
+
+\frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
+\pagestyle{plain} % Default to the plain heading style until the thesis style is called
+\pagestyle{empty}
+\begin{center}
+
+
+	% \renewcommand{\baselinestretch}{1.2}
+	% \thispagestyle{empty}
+
+	\vspace{1.5cm}
+	{\huge\bfseries  \ttitle}
+
+
+	\vspace{1.5cm}
+	\begin{figure}[h]
+	  \centering
+	  \includegraphics[width=1.8in, height=1.8in]{logo.pdf}
+	\end{figure}
+
+
+	\vspace{0.8cm}
+	{\Large \bfseries  \authorname}
+
+	\vspace{0.5cm}
+	\begin{tabular}{ll}
+	\textbf{Adesh Palkar} & 23114004 \\
+	\textbf{Nisarg Prajapati} & 23114073 \\
+	\textbf{Utkarsh Kumar} & 23114101 \\
+	\textbf{Tanay Kapadia} & 23323044 \\
+	\textbf{Parth Baranwal} & 23114076 \\
+	\end{tabular}
+
+
+	\vspace{0.8cm}
+	\groupname\\
+	\deptname\\
+	\univname\\
+	\addressname\\
+
+
+	\vspace{2.8cm}
+	\ifdefempty{\reptype}{}{\reptype\\}
+	% Submitted in partial fulfillment of the requirements for the\\
+	% Degree of \degreename\\
+	% in \subjectname
+
+
+
+	\vspace{0.8cm}
+	% \makebox[3.0cm]{\textit{Supervisor} :} \supname\\
+	% \ifdefempty{\cosupname}{}{\makebox[3.0cm]{\textit{Co-Supervisor} :}  \cosupname}
+
+
+
+	\vspace{0.8cm}
+	April, 2026
+
+\end{center}
+
+\clearpage
+
+\thispagestyle{empty}
+\vspace*{80mm}
+{
+ \begin{center}
+ 	{
+ 		\bfseries
+		\fontfamily{lmr}\selectfont\textcopyright INDIAN INSTITUTE OF TECHNOLOGY ROORKEE, ROORKEE-2026\\
+		ALL RIGHTS RESERVED
+	}
+ \end{center}
+}
+
+\clearpage
+
+\chapter*{Statement of Contributions}
+\addcontentsline{toc}{chapter}{Statement of Contributions}
+
+This report, titled ``\ttitle,'' was prepared as a collaborative group submission.
+The contributions of each author are listed exactly below.
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{p{0.30\textwidth} p{0.64\textwidth}}
+\toprule
+\textbf{Author} & \textbf{Contribution} \\
+\midrule
+Adesh Palkar (23114004) & Concise overview of modern cybersecurity threats and their practical mitigations. \\
+Nisarg Prajapati (23114073) & XZ Utils case study, attack-path analysis, problem statement, and broader impact discussion. \\
+Utkarsh Kumar (23114101) & NDSS Research Paper: MALOSS pipeline, Key Findings, Mitigation Strategies, and Limitations. \\
+Tanay Kapadia (23323044) & Dependency confusion: overview, origin, solution, and limitations. \\
+Parth Baranwal (23114076) & Existing solutions and future solution possibilities. \\
+\bottomrule
+\end{tabular}
+\caption{Author-wise statement of contributions for Group 4.}
+\label{tab:statement-contributions}
+\end{table}
+
+Chapter-wise ``Declaration of Contributions'' sections are also provided at the beginning of every chapter after Chapter 1, as required.
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%\tABSTRACT PAGE
+%----------------------------------------------------------------------------------------
+\begin{abstract}
+% \addchaptertocentry{\abstractname} % Add the abstract to the table of contents
+Modern software systems rely heavily on third-party dependencies and package managers.
+This dependence has increased development speed, but it has also expanded the cyber attack surface,
+especially in software supply chains. This report studies major cyber threat classes and narrows focus
+to software supply chain attacks as a high-impact, ecosystem-level risk.
+
+The report presents: (i) an overview of malware, phishing, denial-of-service, insider threats, and
+supply chain attacks; (ii) a case study of the 2024 XZ Utils backdoor incident; (iii) a review of related
+research, including MALOSS and dependency confusion analysis; and (iv) a comparative discussion of
+existing and proposed mitigations, including eBPF-based monitoring, static analysis, and symbolic
+execution assisted triage.
+
+Our key conclusion is that trust itself becomes the primary attack vector in software supply chains.
+No single defense is sufficient; robust mitigation requires layered controls across maintainers,
+registries, developers, and deployment pipelines. The report closes with practical future directions:
+dependency provenance verification, stronger release integrity checks, continuous monitoring, and
+faster ecosystem-wide response to newly discovered malicious packages.
+
+\end{abstract}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%\tACKNOWLEDGEMENTS
+%----------------------------------------------------------------------------------------
+
+\begin{acknowledgements}
+% \addchaptertocentry{\acknowledgementname} % Add the acknowled gements to the table of contents
+We sincerely thank the course instructor for guidance on technical communication,
+problem framing, and report organization. We also acknowledge the authors of the
+research papers, advisories, and incident reports used in this study, which helped us
+understand software supply chain attacks from both academic and practical viewpoints.
+
+As a team, we appreciate the collaborative effort of all Group 4 members in preparing
+the literature review, case study analysis, mitigation discussion, and final documentation.
+ \vspace{4cm}
+
+\begin{minipage}[b]{0.5\textwidth}
+	\begin{flushleft}
+		~\\ {\bf Date}:
+	\end{flushleft}
+\end{minipage}
+\begin{minipage}[b]{0.45\textwidth}
+	\begin{flushright}
+		~\\
+		\authorname
+	 \end{flushright}
+\end{minipage}
+
+\end{acknowledgements}
