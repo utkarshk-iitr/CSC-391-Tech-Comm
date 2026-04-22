@@ -2,7 +2,7 @@
 
 \hypersetup{linkcolor=black}
 \tableofcontents % Prints the main table of contents
-\hypersetup{linkcolor=red}
+\hypersetup{linkcolor=blue}
 \renewcommand\arraystretch{1}
 
 \mainmatter % Begin numeric (1,2,3...) page numbering
@@ -17,12 +17,18 @@ Modern attacks are targeted, persistent, and increasingly systemic because softw
 are deeply connected through cloud services, CI/CD pipelines, open-source dependencies,
 and distributed teams.
 
-This report presents a broad overview of contemporary cyber threats and then focuses on
-software supply chain attacks as the central theme. The focus is motivated by recent incidents
-where compromise of a trusted upstream component propagated silently to many downstream
-consumers.
+This report presents a broad overview of contemporary cyber threats and then narrows the focus
+to software supply chain attacks. The focus is motivated by recent incidents where compromise
+of a trusted upstream component propagated silently to many downstream consumers.
 
-\section{Modern Cyber Threat Landscape}
+\chapter{Overview and Different Types of Threats}
+\label{ch:threat-overview}
+
+\section*{Declaration of Contributions}
+This chapter was prepared primarily by Adesh Palkar, with technical inputs from all Group 4 members.
+The threat taxonomy and mitigation mapping were consolidated jointly during group reviews.
+
+\section{The Modern Cyber Threat Landscape}
 
 The most common operational threat classes discussed in this report are malware/ransomware,
 phishing and social engineering, denial-of-service (DDoS), insider threats, and software supply
@@ -45,6 +51,58 @@ Supply Chain Attack & Compromise of trusted package, dependency, or build path &
 \end{tabular}
 \end{table}
 
+\section{Threat 1: Malware and Ransomware}
+
+Malware and ransomware are among the most financially damaging threats in current practice.
+Attackers use malicious payloads to encrypt files, steal credentials, or disrupt operations,
+often combining endpoint compromise with data exfiltration and extortion.
+
+\textbf{Key mitigations:} endpoint protection, rapid patching, strict execution policies,
+and secure offline backups with tested recovery workflows.
+
+\section{Threat 2: Phishing and Social Engineering}
+
+Phishing remains the most common entry vector for multi-stage intrusions.
+Adversaries exploit human trust through spoofed emails, fake portals, and impersonation to
+collect credentials or trigger malware execution.
+
+\textbf{Key mitigations:} multi-factor authentication, secure email filtering,
+and continuous awareness training with simulated phishing exercises.
+
+\section{Threat 3: Denial of Service (DDoS)}
+
+DDoS attacks flood services with traffic and exhaust network or application resources,
+causing availability failures for legitimate users.
+
+\textbf{Key mitigations:} rate limiting, upstream filtering, traffic scrubbing,
+and redundant infrastructure with failover planning.
+
+\section{Threat 4: Insider Threats}
+
+Insider threats originate from authorized users whose access is misused intentionally or
+accidentally. These incidents can bypass perimeter controls because the actor already operates
+inside trust boundaries.
+
+\textbf{Key mitigations:} least-privilege access, monitoring of privileged activity,
+and segregation of duties for sensitive operations.
+
+\section{Threat 5: Software Supply Chain Attacks}
+
+Software supply chain attacks differ from direct endpoint attacks because the compromised
+element is often a trusted third-party package, maintainer account, build pipeline,
+or release artifact. The attack propagates through normal dependency workflows.
+
+\begin{figure}[htbp]
+\centering
+\fbox{\parbox{0.86\textwidth}{
+\textbf{Conceptual Supply Chain Path:}
+Developer publishes package $\rightarrow$ registry distributes package
+$\rightarrow$ downstream projects install dependency $\rightarrow$ compromise fans out to users.
+}}
+\caption{Conceptual propagation path in a software supply chain attack.}
+\label{fig:supply-chain-path}
+\end{figure}
+
 \section{Scope and Focus}
 
 The broad threat overview is narrowed to supply chain attacks for three reasons:
@@ -55,104 +113,12 @@ The broad threat overview is narrowed to supply chain attacks for three reasons:
 \item detection and response are difficult when malicious behavior is hidden in normal update paths.
 \end{enumerate}
 
-\section{Key Contributions of This Report}
-
-The main contributions are:
-
-\begin{itemize}
-\item a structured overview of modern cyber threats and mitigations;
-\item a focused case study of the XZ Utils incident (2024) and its attack path;
-\item synthesis of related work on package ecosystem security and dependency confusion;
-\item in-depth discussion of existing and proposed defenses, with explicit limitations and future directions.
-\end{itemize}
-
-\section{Report Organization}
-
-\Cref{ch:background} introduces background, core concepts, and related work.
-\Cref{ch:casestudy} presents the XZ backdoor case and formal problem statement.
-\Cref{ch:solutions} provides in-depth discussion of existing and proposed solutions.
-\Cref{ch:conclusion} summarizes conclusions and outlines future work.
-
-\clearpage
-
-\chapter{Preliminaries, Background, and Related Work}
-\label{ch:background}
-
-\section*{Declaration of Contributions}
-This chapter was prepared primarily by Utkarsh Kumar and Tanay Kapadia.
-Utkarsh Kumar synthesized related research on package ecosystem threats and the MALOSS pipeline,
-while Tanay Kapadia contributed dependency confusion background and static source analysis concepts.
-Adesh Palkar contributed the generalized threat taxonomy and chapter-level consolidation.
-
-\section{Preliminaries and Basic Notions}
-
-Modern applications depend on external libraries distributed through package registries such as
-npm, PyPI, and RubyGems. Let $G=(V,E)$ denote a dependency graph where each node
-$v \in V$ is a package and each edge $e \in E$ represents a dependency relation.
-A compromise in an upstream node can propagate along outgoing dependency paths to multiple
-downstream consumers.
-
-This propagation model explains why software supply chain attacks are ecosystem risks rather than
-isolated endpoint events.
-
-\section{Threat Context for Supply Chains}
-
-Traditional cyber defenses are often perimeter-centric. In contrast, supply chain attacks exploit
-implicit trust in package origin, maintainer identity, build artifacts, and update channels.
-The attack vector is frequently trust itself: a dependency that appears legitimate can execute
-malicious logic during install, import, or runtime.
-
-\begin{figure}[htbp]
-\centering
-\fbox{\parbox{0.86\textwidth}{
-\textbf{Conceptual Supply Chain Path:}
-Developer publishes package $\rightarrow$ registry distributes package
-$\rightarrow$ downstream projects install dependency $\rightarrow$ compromise fans out to users.
-An attacker may inject code upstream or exploit naming/version resolution rules.
-}}
-\caption{Conceptual propagation path in a software supply chain attack.}
-\label{fig:supply-chain-path}
-\end{figure}
-
-\section{Related Work}
-
-Duan \textit{et al.} presented one of the most influential ecosystem-scale studies on package
-manager attacks and proposed MALOSS (MALware detection for Open Source Software), combining
-metadata analysis, static analysis, dynamic analysis, and human validation \citep{duan2021ndss}.
-
-Their findings show that malicious packages can persist for long periods and that attack vectors
-such as typosquatting and account compromise are recurrent. This supports a data-driven,
-continuous-analysis approach rather than one-time manual vetting.
-
-Dependency confusion was later formalized as a practical and severe risk in mixed public-private
-dependency environments. Birsan demonstrated real-world exploitation in enterprise contexts
-\citep{birsan2021dependencyconfusion}, and Ding \textit{et al.} proposed source tree matching for
-systematic risk assessment \citep{ding2024dependency}.
-
-\section{Why Existing Trust Models Fail}
-
-Most ecosystems optimize for package availability and developer convenience.
-As a result, they can inherit the following weaknesses:
-
-\begin{itemize}
-\item weak provenance guarantees for package origin and release artifacts;
-\item delayed detection of malicious behavior hidden in build logic;
-\item version-selection policies that can prioritize untrusted public packages.
-\end{itemize}
-
-These observations motivate the case study and problem formulation in \cref{ch:casestudy},
-followed by in-depth mitigation design in \cref{ch:solutions}.
-
-\clearpage
-
-\chapter{Case Study and Problem Statement}
+\chapter{Case Study}
 \label{ch:casestudy}
 
 \section*{Declaration of Contributions}
-This chapter was prepared primarily by Nisarg Prajapati.
-Nisarg Prajapati developed the XZ Utils case narrative, attack-path analysis,
-and broader impact discussion. Adesh Palkar and Utkarsh Kumar assisted with
-threat framing and technical interpretation.
+This chapter was prepared primarily by Nisarg Prajapati, with supporting review by
+Adesh Palkar and Utkarsh Kumar.
 
 \section{Case Study: XZ Utils Backdoor (2024)}
 
@@ -170,14 +136,10 @@ concerns due to potential unauthorized access paths in environments linked with
 \toprule
 \textbf{Event} & \textbf{Observation} \\
 \midrule
-Upstream release activity & Malicious behavior was associated with release/build artifacts.
-\\
-Potential integration path & Systems using affected dependency paths could inherit risk transitively.
-\\
-Ecosystem response & Advisories and coordinated mitigation were issued to reduce spread.
-\\
-Security lesson & A trusted low-level dependency can become a high-impact attack surface.
-\\
+Upstream release activity & Malicious behavior was associated with release/build artifacts.\\
+Potential integration path & Systems using affected dependency paths could inherit risk transitively.\\
+Ecosystem response & Advisories and coordinated mitigation were issued to reduce spread.\\
+Security lesson & A trusted low-level dependency can become a high-impact attack surface.\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -195,10 +157,23 @@ The attack path can be interpreted as follows:
 This pattern demonstrates a core insight: in supply chain attacks, \emph{implicit trust}
 in dependency ecosystems can bypass traditional defensive boundaries.
 
-\section{Problem Statement}
+\section{Why This Incident Matters}
+
+A trusted low-level dependency became a potential ecosystem-level risk amplifier.
+The case highlights how delayed detection in upstream components can expose many downstream
+applications simultaneously.
+
+\chapter{Problem Statement}
+\label{ch:problem}
+
+\section*{Declaration of Contributions}
+This chapter was prepared jointly by Nisarg Prajapati and Adesh Palkar,
+with final wording review by all members.
 
 \textbf{The widespread blind trust in unverified open-source dependencies exposes organizations
 to devastating software supply chain attacks.}
+
+\section{Technical Meaning}
 
 Technically, this problem appears because:
 
@@ -212,49 +187,150 @@ Technically, this problem appears because:
 
 A single compromised package can affect many products and organizations across sectors.
 Attack impact propagates from upstream maintainers to downstream applications and then to end users.
-National-level advisories (for example, CISA guidance) reinforce the need for rapid,
-layered defense strategies and coordinated response \citep{cisa2024shieldsup}.
+National-level advisories reinforce the need for rapid, layered defense strategies and coordinated
+response \citep{cisa2024shieldsup}.
 
-The solution direction is developed in \cref{ch:solutions}, where we compare current controls
-and propose a composite mitigation strategy.
+\section{What Is Needed}
 
-\clearpage
+\begin{itemize}
+\item stronger dependency verification across all critical components;
+\item robust artifact integrity checks in release and deployment workflows;
+\item better maintainer-risk monitoring and trust governance;
+\item continuous supply chain security monitoring across software ecosystems.
+\end{itemize}
 
-\chapter{In-depth Discussion of Existing and Proposed Solutions}
-\label{ch:solutions}
+\chapter{Related Work - NDSS Research Paper}
+\label{ch:related-ndss}
 
 \section*{Declaration of Contributions}
-This chapter was jointly prepared by Parth Baranwal, Utkarsh Kumar, and Tanay Kapadia.
-Parth Baranwal contributed the analysis of existing and future-oriented controls.
-Utkarsh Kumar contributed MALOSS and mitigation-limitations discussion.
-Tanay Kapadia contributed dependency confusion analysis and source-level detection approach.
+This chapter was prepared primarily by Utkarsh Kumar,
+with editorial and technical inputs from Adesh Palkar.
 
-\section{Existing Solution Families}
+\section{Research Context and Motivation}
 
-Current defenses against supply chain compromise can be grouped into four practical families:
+Duan \textit{et al.} presented one of the most influential ecosystem-scale studies on package
+manager attacks and proposed MALOSS (MALware detection for Open Source Software), combining
+metadata analysis, static analysis, dynamic analysis, and human validation \citep{duan2021ndss}.
 
-\begin{enumerate}
-\item \textbf{Runtime visibility and enforcement:} eBPF-based telemetry and policy enforcement
-at kernel level can improve detection of anomalous process, file, and network behavior.
-\item \textbf{Registry-side controls:} MFA for maintainers, typo detection, rapid advisories,
-and package vetting reduce malicious publication success.
-\item \textbf{Build and release integrity:} artifact signing, provenance metadata, and reproducible
-build checks reduce tampering risk.
-\item \textbf{Automated package analysis:} pipelines such as MALOSS combine metadata,
-static, dynamic, and manual verification stages \citep{duan2021ndss}.
-\end{enumerate}
+The paper reframes supply chain defense as a scalable ecosystem problem rather than a set of
+isolated package-level incidents.
 
-\section{Dependency Confusion and Source-based Risk Assessment}
+\section{MALOSS Pipeline}
 
-Dependency confusion exploits package name and version resolution across public and private
-registries. If resolver policies prefer an untrusted public package, an attacker can hijack a
+\subsection{Metadata Analysis}
+Metadata signals such as author history, release cadence, dependency anomalies,
+and suspicious package naming patterns are used to flag high-risk candidates early.
+
+\subsection{Static Analysis}
+Source code is scanned for suspicious API usage and risky data flows,
+including patterns that can indicate exfiltration or remote command execution paths.
+
+\subsection{Dynamic Analysis}
+Packages are executed in sandboxed environments to observe network behavior,
+file operations, and process-level effects under realistic install/import/runtime stages.
+
+\subsection{Human-in-the-loop Validation}
+Manual triage confirms high-confidence findings, improves precision,
+and feeds back into detection rule refinement.
+
+\section{Key Findings and Practical Implications}
+
+The NDSS study reported hundreds of malicious packages across major ecosystems,
+showing that typosquatting, account compromise, and delayed takedowns are recurrent.
+The core implication is that continuous, automated, and multi-layered screening is
+necessary for sustainable risk reduction.
+
+\section{Mitigation Takeaways and Limits}
+
+\begin{itemize}
+\item registry-level controls: maintainer MFA, typo detection, rapid advisories;
+\item developer-level controls: dependency pinning, script review, update risk gating;
+\item ecosystem-level controls: faster dependent notification and coordinated response.
+\end{itemize}
+
+Even with these controls, evasion remains possible through obfuscation,
+trigger-gated behavior, and delayed payload activation.
+
+\chapter{Related Work - Dependency Confusion}
+\label{ch:related-dependency-confusion}
+
+\section*{Declaration of Contributions}
+This chapter was prepared primarily by Tanay Kapadia,
+with supporting technical review by Utkarsh Kumar.
+
+\section{Dependency Manager Context}
+
+Modern software ecosystems rely on dependency managers and registry resolution logic.
+When public and private package names overlap, resolver policies can introduce a risk
+that an unintended package is selected.
+
+\section{Dependency Confusion Mechanism}
+
+Dependency confusion exploits naming/version resolution across public and private registries.
+If resolver policies prioritize an untrusted public package, an attacker can hijack a
 dependency path \citep{birsan2021dependencyconfusion}.
 
-Ding \textit{et al.} proposed static source tree matching to compare intended components with
-actual dependencies, enabling automated discrepancy detection even in obfuscated or injected
-settings \citep{ding2024dependency}.
+\section{Risk Assessment by Source Tree Matching}
 
-\section{Proposed Layered Mitigation Framework}
+Ding \textit{et al.} proposed source tree matching for systematic risk assessment,
+enabling comparison of intended components with actual resolved dependencies even in
+obfuscated settings \citep{ding2024dependency}.
+
+\section{Method Summary}
+
+\begin{enumerate}
+\item obtain source and component context;
+\item generate abstract syntax trees;
+\item optimize trees by removing low-value nodes;
+\item compare AST structures for accurate component mapping.
+\end{enumerate}
+
+\section{Why Existing Trust Models Fail}
+
+Most ecosystems optimize for package availability and developer convenience.
+As a result, they can inherit the following weaknesses:
+
+\begin{itemize}
+\item weak provenance guarantees for package origin and release artifacts;
+\item delayed detection of malicious behavior hidden in build logic;
+\item version-selection policies that can prioritize untrusted public packages.
+\end{itemize}
+
+\chapter{Existing Solution}
+\label{ch:existing-solution}
+
+\section*{Declaration of Contributions}
+This chapter was prepared primarily by Parth Baranwal,
+with technical inputs from the full group.
+
+\section{eBPF-based Runtime Security}
+
+Current defenses against supply chain compromise can include eBPF-based runtime telemetry and
+policy enforcement at kernel level, improving visibility for process, filesystem,
+and network anomalies.
+
+\section{Practical Control Families}
+
+\begin{enumerate}
+\item \textbf{Runtime visibility and enforcement:} observe suspicious behavior close to the kernel surface.
+\item \textbf{Registry-side controls:} maintainer hardening, typo detection, and package vetting.
+\item \textbf{Build and release integrity:} artifact signing, provenance metadata, and reproducible build checks.
+\item \textbf{Automated package analysis:} pipelines such as MALOSS for ecosystem-scale screening.
+\end{enumerate}
+
+\section{Operational Constraints}
+
+No single control family is sufficient on its own.
+Effective defense requires layered deployment and continuous policy refinement.
+
+\chapter{Proposed Solution}
+\label{ch:proposed-solution}
+
+\section*{Declaration of Contributions}
+This chapter was jointly prepared by Parth Baranwal and Utkarsh Kumar,
+with review support from Tanay Kapadia.
+
+\section{Layered Mitigation Framework}
 
 Based on the case study and related work, we propose a layered framework that combines
 prevention, detection, and response.
@@ -275,45 +351,39 @@ prevention, detection, and response.
 \end{algorithmic}
 \end{algorithm}
 
+\section{Static Analysis + Symbolic Execution Direction}
+
+To reduce missed detections from input-dependent dynamic behavior,
+we recommend combining static pre-screening with selective symbolic execution for
+high-risk code paths.
+
 \section{Mitigation Limits and Practical Constraints}
 
-No single method is complete. Main constraints include:
+Main constraints include:
 
 \begin{itemize}
-\item static analysis may miss runtime-triggered behavior or obfuscated logic;
+\item static analysis may miss runtime-triggered behavior or heavily obfuscated logic;
 \item dynamic analysis depends on execution paths and may miss dormant payloads;
 \item full manual verification does not scale to very large package ecosystems;
-\item delayed ecosystem response can prolong exposure windows.
+\item symbolic comparison workflows can become computationally expensive without good heuristics.
 \end{itemize}
 
-Hence, effective defense is a socio-technical process that combines automation,
-policy enforcement, and rapid incident communication.
-
-\section{Chapter Summary}
-
-The chapter demonstrates that practical risk reduction requires layered controls,
-continuous monitoring, and explicit trust verification throughout the software lifecycle.
-These insights lead to the consolidated conclusions and roadmap in \cref{ch:conclusion}.
-
-\clearpage
-
-\chapter{Conclusion and Future Work}
+\chapter{Conclusion}
 \label{ch:conclusion}
 
 \section*{Declaration of Contributions}
 This chapter was jointly prepared by Parth Baranwal and Adesh Palkar,
 with final review by all Group 4 members.
 
-\section{Conclusion}
-
 This report examined modern cyber threats and focused on software supply chain attacks
-as a high-impact, trust-centric threat model. Through the XZ Utils case study
-(\cref{ch:casestudy}) and related research synthesis (\cref{ch:background}), we observed that
-a single compromised upstream dependency can propagate risk to many downstream systems.
+as a high-impact, trust-centric threat model. Through the XZ Utils case study and related
+research synthesis, we observed that a single compromised upstream dependency can propagate
+risk to many downstream systems.
 
-The in-depth analysis (\cref{ch:solutions}) shows that existing solutions improve visibility
-and control but remain individually insufficient. The central conclusion is that dependency
-trust must be continuously verified, not implicitly assumed.
+The central conclusion is that dependency trust must be continuously verified, not implicitly
+assumed. Existing controls improve visibility and reduce risk, but robust defense requires
+layered safeguards across package publication, dependency resolution, CI/CD pipelines,
+and runtime monitoring.
 
 \section{Future Work}
 
@@ -327,5 +397,11 @@ The following directions are recommended for improving practical defenses:
 \item broader adoption of security-by-default package publishing and maintainer hardening.
 \end{enumerate}
 
-These directions support a shift from reactive patching to proactive and continuous
-software supply chain security.
+\chapter{References}
+\label{ch:references-note}
+
+\section*{Declaration of Contributions}
+This chapter was curated by the full group to ensure citation completeness and consistency.
+
+The references used in this report are provided in the bibliography section generated at the
+end of this document.

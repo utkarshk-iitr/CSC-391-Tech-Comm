@@ -1,5 +1,105 @@
 \documentclass[11pt, english, onehalfspacing, headsepline,oneside]{MastersDoctoralThesis}
+% \usepackage{times} % sets times new roman font
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{etoolbox}
+
+% \usepackage{palatino} % Use the Palatino font by default
+\usepackage{graphicx}
+\usepackage{lmodern}
+
+\usepackage{amstext,amssymb,bm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+
+\usepackage{mathpazo}
+\usepackage{amsmath}
+\usepackage{listings}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{blue},
+  numberstyle=\tiny\ttfamily\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\tiny,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  keepspaces=false,
+  numbers=left,
+  numbersep=6pt,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=2
+}
+
+\lstset{style=mystyle, basicstyle = \ttfamily \footnotesize, basewidth  = {0.5em,0.5em}, xleftmargin=0.3cm}
+\usepackage{float}
+\usepackage[numbers]{natbib}
+\usepackage[bookmarks=true,colorlinks=true,linkcolor=blue,citecolor=brown]{hyperref}
+\pdfstringdefDisableCommands{\let\uppercase\relax}
+
+\makeatletter
+\AtBeginDocument{\def\@citecolor{blue}}
+\makeatother
+
+\usepackage[nameinlink,capitalize]{cleveref}
+\usepackage{algorithm, algpseudocode}
+\providecommand\algorithmname{algorithm}
+
+\makeatletter
+\newcounter{algorithmicH}
+\let\oldalgorithmic\algorithmic
+\renewcommand{\algorithmic}{\stepcounter{algorithmicH}\oldalgorithmic}
+\renewcommand{\theHALG@line}{ALG@line.\thealgorithmicH.\arabic{ALG@line}}
+\makeatother
+
+\thesistitle{Cyber Threats and Their Mitigations}
+\author{Group 4}
+\supervisor{}
+\supervisortitle{Technical Communication}
+\cosupervisor{}
+\cosupervisortitle{}
+\degree{Technical Communication Report}
+\subject{}
+\duration{January, 2026 to April, 2026}
+\group{Group 4}
+\department{Computer Science and Engineering}
+\university{\href{https://www.iitr.ac.in}{Indian Institute of Technology Roorkee}}
+\addresses{Roorkee - 247667 (INDIA)}
+\reporttype{Technical Communication Presentation Report}
+\examiner{}
+\keywords{cybersecurity, supply chain attack, XZ Utils, dependency confusion, malware analysis, mitigation}
+\AtBeginDocument{
+\hypersetup{pdftitle=\ttitle}
+\hypersetup{pdfauthor=\authorname}
+\hypersetup{pdfkeywords=\keywordnames}
+}
+
+\newcommand{\disp}{\boldsymbol{u}}
+\newcommand{\dmg}{\theta}
+\newcommand{\xvec}{\boldsymbol{x}}
+\newcommand{\straint}{\boldsymbol{\epsilon}}
+\newcommand{\stresst}{\boldsymbol{\sigma}}
+
+\DeclareDocumentCommand\dpdv{}{\displaystyle\partialderivative}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
+
+\newcommand{\ddfrac}[2]{\ensuremath{\frac{\displaystyle #1}{\displaystyle #2}}}
+
+\begin{document}
+\newgeometry{left=3.0cm,right=3.0cm,top=3.0cm,bottom=3.0cm}
+
 \input{frontmatter}
 \input{allchapters}
 \input{backmatter}
+
 \end{document}
