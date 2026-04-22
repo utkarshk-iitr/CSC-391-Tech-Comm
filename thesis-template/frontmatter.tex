@@ -8,21 +8,12 @@
 \usepackage{graphicx}
 \usepackage{lmodern}
 
-\usepackage{lineno,amstext,amssymb,bm}
+\usepackage{amstext,amssymb,bm}
 \usepackage{mathtools}
 \usepackage{enumitem}
 
 \usepackage{mathpazo} % Use the Palatino font by default
-\usepackage{mathrsfs}
 \usepackage{amsmath}
-% maths symbol package
-\usepackage{stmaryrd}
-
-
-% to get jump operator
-\usepackage{multicol}
-% side by side equations
-\usepackage{IEEEtrantools}
 %--------------------------------------------------------------------------------------------------
 %% Code
 %--------------------------------------------------------------------------------------------------
@@ -64,7 +55,7 @@
 %--------------------------------------------------------------------------------------------------
 \usepackage{float}
 \usepackage[numbers]{natbib}
-\usepackage[bookmarks=true,colorlinks=true,linkcolor=blue,citecolor=red,backref=page]{hyperref}
+\usepackage[bookmarks=true,colorlinks=true,linkcolor=blue,citecolor=red]{hyperref}
 \pdfstringdefDisableCommands{\let\uppercase\relax}
 
 \makeatletter
@@ -93,10 +84,7 @@
 %--------------------------------------------------------------------------------------------------
 %% Publication
 %--------------------------------------------------------------------------------------------------
-\usepackage[resetlabels]{multibib}
-\newcites{pub}{Papers in Refereed Journals}
-\newcites{conf}{National and International Conference Proceedings}
-% \show\bibsection
+% Unused publication-specific bib passes removed to speed up compilation on constrained environments.
 
 \thesistitle{Cyber Threats and Their Mitigations: A Study of Software Supply Chain Risks} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
 \author{Group 4} % Your name, this is used in the title page and abstract, print it elsewhere with \authorname
