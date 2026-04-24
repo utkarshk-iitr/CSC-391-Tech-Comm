@@ -1,0 +1,92 @@
+\pagestyle{plain}
+
+\hypersetup{linkcolor=blue}
+
+\renewcommand\arraystretch{1.5}
+
+\renewcommand{\bibsection}{\chapter*{\bibname}}
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+
+\appendix
+
+%---
+\chapter{Pseudocode for Proposed Solution}
+\section{Semantic Matcher}
+\begin{lstlisting}[language=python,caption={Semantic SMT Analyser},label={lst:matcher}]
+"""
+Semantic Supply Chain Validator
+Requires: a symbolic execution engine (e.g., angr, Triton, or KLEE bindings)
+          and an SMT solver backend (e.g., Z3).
+"""
+ 
+def analyze_component(binary_artifact: bytes) -> list[ThreatReport]:
+    """
+    Entry point. Accepts a binary blob and returns a (possibly empty)
+    list of ThreatReport objects, one per detected malicious path.
+    """
+    engine = SymbolicExecutionEngine(binary_artifact)
+    smt_corpus = load_malicious_logic_database()
+    findings = []
+ 
+    # Explore all feasible execution paths via a work list algorithm.
+    # The engine forks state at every conditional branch and prunes
+    # paths whose constraints become unsatisfiable.
+    for path in engine.explore_all_paths():
+ 
+        # We are only interested in paths that reach a meaningful
+        # exit point: a syscall, a return from main, or a crash.
+        if not path.reaches_exit_point():
+            continue
+ 
+        # Serialise the path condition + exit state as an SMT formula.
+        # Example formula (simplified): (alpha == "admin_backup") AND
+        #   (beta == 0xDEADBEEF) AND (syscall == SYS_sendto)
+        path_equation = path.generate_smt_formula()
+ 
+        # Compare against every known malicious semantic signature.
+        for signature in smt_corpus:
+            if heuristic_match(path_equation, signature):
+                findings.append(
+                    ThreatReport(
+                        severity="Critical",
+                        logic_pattern=signature.name,
+                        path_trace=path.backtrace(),
+                        satisfying_input=signature.witness_input(),
+                    )
+                )
+ 
+    return findings
+ 
+ 
+def heuristic_match(candidate_eq, target_signature) -> bool:
+    """
+    Determine whether candidate_eq subsumes target_signature.
+ 
+    Full SMT equivalence checking is NP-hard in general, so we use a
+    two-stage triage:
+      1. Cheap structural hash comparison to quickly rule out obvious
+         non-matches (O(1) per pair).
+      2. Logical subsumption check via the SMT solver for candidates
+         that survive stage 1 (computationally expensive; reserved for
+         high-confidence near-matches only).
+ 
+    Returns True if the candidate path is assessed to match the
+    malicious signature, False otherwise.
+    """
+    # Stage 1: fast structural hash filter
+    if candidate_eq.structural_hash() != target_signature.structural_hash():
+        return False
+ 
+    # Stage 2: logical subsumption via SMT solver
+    # Ask the solver: does candidate_eq IMPLY target_signature?
+    # i.e., is (candidate_eq AND NOT target_signature) unsatisfiable?
+    solver = SMTSolver()
+    solver.add(candidate_eq)
+    solver.add(negate(target_signature.formula))
+    return solver.check() == UNSAT   # UNSAT => implication holds
+\end{lstlisting}
+%------------------
+
+\clearpage
