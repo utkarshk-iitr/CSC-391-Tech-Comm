@@ -48,8 +48,6 @@ April, 2026}
 \pagestyle{thesis}
 
 \chapter{Motivation \& Core Question}
-\textbf{Chapter focus.} This chapter frames the report around one evaluative lens from development economics: whether global policy frameworks reduce inequality across countries, not only improve averages. The PPT's opening argument emphasizes that SDGs should be judged by distributional outcomes, especially for fragile and low-capacity states. In this report, we therefore treat convergence as the operational test of SDG effectiveness across heterogeneous country contexts \citep{sachs2025,sdsn2022}.
-
 The 2030 Agenda (2015) defines 17 SDGs as a universal development compact across social, economic, and environmental dimensions \citep{sdsn2022,sachs2025}. The practical policy question is not only whether average SDG performance improves, but whether the distance between high-performing and low-performing countries narrows over time.
 
 \textbf{Stylized fact:} cross-country inequality remains large. In recent SDSN scorecards, frontier countries are typically near 80 points while fragile states often remain far below 50 \citep{sachs2025}.
@@ -63,8 +61,6 @@ where $\bar{S}^{\text{high}}_t$ and $\bar{S}^{\text{low}}_t$ denote average SDG 
 \textbf{Core research question:} are countries converging in SDG outcomes, or are SDGs improving global averages without sufficiently reducing global disparities?
 
 \chapter{Why Convergence Matter}
-\textbf{Chapter focus.} Convergence has ethical and macroeconomic significance. Ethically, it reflects fairness in global development opportunities; economically, it indicates whether technology, finance, and institutions are diffusing broadly enough to close welfare gaps. This chapter follows the PPT logic that policy success must be judged by both level effects (average SDG gains) and distribution effects (who catches up and who is left behind) \citep{barro1992,salaimartin1996,sachs2025}.
-
 Convergence is central because SDGs are normatively about inclusion. If lower-performing countries systematically catch up, the framework is reducing development inequality; if not, the system may deliver progress without fairness \citep{sachs2025}.
 
 Let cross-country welfare loss from inequality be:
@@ -81,8 +77,6 @@ where $S_{it}$ is the SDG composite for country $i$ and $\bar{S}_t$ is the globa
 This is why convergence analysis is a stronger evaluation criterion than average growth alone \citep{barro1992,salaimartin1996}.
 
 \chapter{SDG Performance}
-\textbf{Chapter focus.} Before testing convergence, we first describe the empirical distribution of SDG scores. The key message from the PPT is that the world has moved forward, but from uneven starting points and with persistent lower-tail underperformance. This chapter therefore interprets the index not as a ranking device alone, but as a state variable for dynamic analysis of gaps, mobility, and persistence \citep{sdsn2022,sachs2025}.
-
 The SDSN SDG Index aggregates goal-level performance into a 0--100 score \citep{sdsn2022,sachs2025}. A stylized representation is:
 \[
 S_{it} = 100\sum_{g=1}^{17} w_g s_{igt}, \qquad \sum_{g=1}^{17} w_g = 1
@@ -99,8 +93,6 @@ where $s_{igt}$ is normalized performance for goal $g$ in country $i$ at time $t
 Empirically, the global distribution is left-skewed: many countries cluster in mid-to-high ranges, but a non-trivial tail remains far behind. Even top-ranked countries exhibit persistent deficits in goals like SDG 2 (Hunger) and SDG 13 (Climate Action), so complete achievement remains elusive \citep{sachs2025}.
 
 \chapter{Convergence Concepts}
-\textbf{Chapter focus.} This chapter clarifies the conceptual vocabulary used throughout the report. The PPT distinguishes clearly between dispersion-based and growth-based convergence metrics, and that distinction is crucial for interpretation. We use these concepts jointly to avoid false conclusions that can arise when one indicator improves while another remains stagnant \citep{barro1992,salaimartin1996,phillips2007}.
-
 We use four complementary concepts from the growth-convergence literature \citep{barro1992,salaimartin1996,phillips2007}:
 \begin{itemize}
     \item \textbf{$\sigma$-convergence:} cross-country dispersion falls over time, i.e., $\sigma_{t+1} < \sigma_t$.
@@ -111,8 +103,6 @@ We use four complementary concepts from the growth-convergence literature \citep
 In practice, robust diagnosis requires reading all four together because any single metric can be misleading in heterogeneous global panels.
 
 \chapter{Theoretical Framework}
-\textbf{Chapter focus.} The framework translates the PPT intuition into a compact structural equation linking policy effort to realized SDG gains under constraints. It highlights that convergence is not automatic; it is mediated by absorptive capacity, institutional quality, and shock exposure. This means identical policy inputs can produce divergent outcomes across countries when state capability differs \citep{sachs2025,bigerna2025}.
-
 SDG dynamics can be represented as a balance between policy effort and structural frictions:
 \[
 \Delta S_{it} = \alpha + \phi I_{it} - \theta B_{it} + u_{it}
@@ -127,8 +117,6 @@ Two mechanisms jointly operate:
 This dual mechanism is consistent with classical convergence theory and modern panel evidence in SDG applications \citep{barro1992,salaimartin1996,bigerna2025}.
 
 \chapter{Hypotheses}
-\textbf{Chapter focus.} The hypotheses convert the conceptual framework into testable empirical claims. They are ordered to mirror the PPT sequence: first catch-up, then aggregate dispersion, then controls, then clubs. This ordering is useful because it separates pure growth dynamics from composition effects and structural heterogeneity \citep{bigerna2025,phillips2007}.
-
 Based on theory and recent empirical findings, we test:
 \begin{itemize}
     \item \textbf{H1:} $\beta < 0$ for the aggregate SDG index and for most individual goals.
@@ -139,8 +127,6 @@ Based on theory and recent empirical findings, we test:
 These hypotheses are aligned with recent SDG convergence studies \citep{bigerna2025,phillips2007}.
 
 \chapter{Data and Measurement}
-\textbf{Chapter focus.} Reliable convergence inference depends on comparable measurement across countries and years. Following the PPT, this chapter documents panel coverage, normalization choices, and indicator design so that estimated convergence is not an artifact of scaling or missing-data bias. The emphasis is transparency: same transformation rules, same time window, and explicit robustness logic \citep{sdsn2022,bigerna2025}.
-
 \textbf{Sample and sources.}
 \begin{itemize}
     \item Country panel: roughly 190 countries, 2000--2022.
@@ -157,8 +143,6 @@ with direction adjusted where lower raw values imply better outcomes.
 \textbf{Measurement strategy.} We report aggregate SDG index results and goal-wise estimations. To reduce missingness bias, each goal is proxied by one primary indicator in the baseline specification, then checked for robustness with alternative indicators where feasible \citep{bigerna2025,sdsn2022}.
 
 \chapter{\texorpdfstring{$\sigma$}{Sigma}-Convergence Model}
-\textbf{Chapter focus.} The PPT uses $\sigma$-convergence as the primary inequality diagnostic. This chapter formalizes that diagnostic with absolute and relative dispersion measures so interpretation remains stable even when global means shift upward. In policy terms, declining dispersion is the minimum condition for saying that SDGs are equalizing outcomes, not merely lifting all boats at different speeds \citep{salaimartin1996,bigerna2025}.
-
 The dispersion metric is:
 \[
 \sigma_t = \sqrt{\frac{1}{N}\sum_{i=1}^{N}(S_{it} - \bar{S}_t)^2}
@@ -172,22 +156,20 @@ CV_t = \frac{\sigma_t}{\bar{S}_t}
 Convergence requires a declining $\sigma_t$ (and preferably declining $CV_t$). If dispersion is flat or increasing, global inequality remains high despite average gains \citep{salaimartin1996,bigerna2025}.
 
 \chapter{\texorpdfstring{$\sigma$}{Sigma}-Convergence Results}
-\textbf{Chapter focus.} This section translates the PPT chart evidence into analytical claims: global dispersion does not decline consistently, and goal-level patterns differ sharply. The implication is that aggregate progress masks stubborn inequality in specific domains. We therefore interpret weak $\sigma$-convergence as a signal for targeted policy design rather than as failure of the SDG framework itself \citep{bigerna2025,sachs2025}.
 
-Empirical results indicate weak global $\sigma$-convergence. Aggregate dispersion rises over the sample in the slide evidence, implying that cross-country inequality remains persistent \citep{bigerna2025}.
+Empirical evidence suggests weak global $\sigma$-convergence, with rising dispersion indicating persistent cross-country inequality \citep{bigerna2025}. Goal-level patterns are heterogeneous, requiring a disaggregated view. Poverty- and access-related goals (e.g., water, sanitation, energy) show clearer convergence, largely driven by technological diffusion and international aid. In contrast, structurally complex challenges—such as hunger, inequality, and climate sustainability—exhibit persistent or increasing divergence.
 
-\begin{figure}[htbp]
+This contrast highlights a structural insight: global policies are more effective for discrete, infrastructure-based goals that can bypass state capacity constraints. Goals requiring institutional depth, behavioral change, or redistribution see weaker outcomes, as lower-capacity states struggle to implement them effectively. Consequently, improvements in global averages can obscure widening disparities in critical areas. These dynamics suggest that policy frameworks must shift toward context-specific institutional support, as global averages alone do not reflect equitable reductions in inequality \citep{sachs2025,bigerna2025}.
+
+\newpage
+\begin{figure}[H]
   \centering
-  \includegraphics[width=0.92\textwidth]{imgs/fig_2.png}
-  \caption{$\sigma$-convergence patterns across SDGs (adapted from convergence evidence in \citealp{bigerna2025}).}
+  \includegraphics[width=\textwidth]{imgs/fig_2.png}
+  \caption{$\sigma$-convergence patterns across SDGs (adapted from \citealp{bigerna2025}).}
   \label{fig:sigma-results}
 \end{figure}
 
-Goal-wise evidence is heterogeneous: poverty- and access-related goals show clearer equalization, while hunger, inequality, and climate-linked goals show persistent or worsening dispersion. Hence, improvements in global averages cannot be interpreted as automatic reduction in cross-country inequality \citep{sachs2025,bigerna2025}.
-
 \chapter{\texorpdfstring{$\beta$}{Beta}-Convergence Model}
-\textbf{Chapter focus.} The PPT positions $\beta$-convergence as the catch-up mechanism. This chapter models that mechanism explicitly through growth-on-initial-level regressions and dynamic panel specifications. The methodological point is that persistence and endogeneity are expected in SDG data, so robustness across estimators is necessary before drawing policy conclusions \citep{barro1992,bigerna2025}.
-
 We estimate absolute and conditional $\beta$-convergence using panel regressions:
 \[
 \Delta \ln S_{it} = \alpha + \beta \ln S_{i,t-1} + \gamma'X_{it} + \mu_i + \tau_t + \varepsilon_{it}
@@ -204,8 +186,6 @@ Interpretation of $\beta$:
 Because SDG panels exhibit persistence and potential endogeneity, baseline OLS estimates are complemented with dynamic panel GMM (Arellano--Bond style) for robustness \citep{barro1992,bigerna2025}.
 
 \chapter{\texorpdfstring{$\beta$}{Beta}-Convergence Results}
-\textbf{Chapter focus.} The reported negative coefficients indicate that many lagging countries are improving faster, consistent with the PPT's empirical message. However, convergence speeds vary strongly by goal and implementation channel. We therefore read these results as conditional optimism: catch-up is visible, but not uniform or sufficient to erase inherited disparities \citep{bigerna2025,sachs2025}.
-
 Most goals show statistically significant negative $\beta$ estimates, indicating meaningful catch-up dynamics. Convergence is generally faster in market-linked domains (energy, infrastructure, growth) and slower in institution-intensive domains (hunger, health, inequality) \citep{bigerna2025,sachs2025}.
 
 \begin{figure}[htbp]
@@ -218,8 +198,6 @@ Most goals show statistically significant negative $\beta$ estimates, indicating
 The key empirical message is that $\beta$-convergence can coexist with weak $\sigma$-convergence: many countries improve faster, yet overall inequality can remain high when initial gaps are very large.
 
 \chapter{Speed of Convergence}
-\textbf{Chapter focus.} The PPT emphasizes that the sign of convergence is not enough; pace matters for policy planning horizons. This chapter converts estimated coefficients into speed and half-life metrics to compare sectoral feasibility. In practice, a goal with a 30-year half-life needs institutional patience and fiscal continuity very different from a goal with a 2- to 5-year half-life \citep{bigerna2025}.
-
 With $\beta$ estimated from the growth specification, the annual convergence speed can be approximated by:
 \[
 \lambda = -\ln(1+\beta), \qquad (\beta > -1)
@@ -232,8 +210,6 @@ T_{1/2} = \frac{\ln 2}{\lambda}
 If $\lambda$ is high, catch-up is rapid; if $\lambda$ is low, progress is slow even when convergence exists. Reported ranges in the SDG slide evidence imply half-lives that vary from a few years to multiple decades, highlighting strong heterogeneity across goals \citep{bigerna2025}.
 
 \chapter{Key Structural Insight}
-\textbf{Chapter focus.} This chapter captures one of the strongest PPT insights: implementation channel determines convergence speed. Market-scalable domains diffuse faster, while institution-intensive goals converge slowly because they require deep governance capacity and social coordination. The distinction helps explain why some SDGs respond quickly to capital and technology while others require long institutional reform cycles \citep{sachs2025,bigerna2025}.
-
 A useful organizing distinction is between market-oriented goals and policy/institution-oriented goals.
 
 \begin{figure}[htbp]
@@ -250,8 +226,6 @@ A useful organizing distinction is between market-oriented goals and policy/inst
 This explains why average global progress can coexist with persistent gaps in institution-heavy goals \citep{sachs2025}.
 
 \chapter{\texorpdfstring{$\sigma$ vs $\beta$}{Sigma vs Beta} Paradox}
-\textbf{Chapter focus.} The PPT paradox is not a contradiction but a decomposition problem. Faster growth among lagging countries can coexist with persistent global dispersion when initial distances are large and between-group gaps remain rigid. This chapter provides the variance decomposition needed to reconcile those two empirical facts in one coherent narrative \citep{phillips2007,bigerna2025}.
-
 The paradox is resolved by decomposition of total inequality into within-group and between-group components:
 \[
 \mathrm{Var}(S_t) = \sum_{c} p_c\,\mathrm{Var}(S_t\mid c) + \mathrm{Var}\!\left(\mathbb{E}[S_t\mid c]\right)
@@ -261,8 +235,6 @@ where $c$ indexes country clubs and $p_c$ is club population share.
 Even when many countries catch up within clubs (negative $\beta$), between-club gaps can stay large, keeping total dispersion high. Hence, $\beta$-convergence and weak global $\sigma$-convergence are not contradictory; they describe different margins of adjustment \citep{phillips2007,bigerna2025}.
 
 \chapter{Club Convergence}
-\textbf{Chapter focus.} Club convergence is the bridge between global diagnostics and actionable policy. The PPT argues that countries with similar fundamentals travel together, while cross-club mobility is limited. This implies that a common SDG framework should be implemented through differentiated pathways, financing structures, and sequencing strategies \citep{phillips2007,sachs2025}.
-
 Following Phillips--Sul style intuition, define transition paths relative to the global mean:
 \[
 h_{it} = \frac{S_{it}}{\frac{1}{N}\sum_{j=1}^{N} S_{jt}}
@@ -272,8 +244,6 @@ Convergence requires cross-sectional variation in $h_{it}$ to shrink over time. 
 This club perspective is policy-relevant: one global target architecture requires differentiated national pathways.
 
 \chapter{Case Study 1: Nordic vs Fragile States}
-\textbf{Chapter focus.} This case study operationalizes the framework by contrasting frontier and fragile trajectories from the PPT. The Nordic path reflects strong administrative capability and policy continuity, while fragile-state paths reflect conflict exposure and institutional breakdown. The comparison demonstrates that divergence can persist even under shared global goals when structural parameters differ sharply \citep{sachs2025}.
-
 Nordic countries (for example Finland and Sweden) are near the SDG frontier because of strong institutions, administrative quality, and durable social investment. Fragile states (for example Yemen and Somalia) remain in low-score equilibria due to conflict, fiscal stress, and weak public-service capacity \citep{sachs2025}.
 
 The divergence can be interpreted as a structural-parameter gap in the framework from Chapter 5:
@@ -283,8 +253,6 @@ The divergence can be interpreted as a structural-parameter gap in the framework
 with lower effective $\phi$ and higher $\theta$ in fragile contexts. Therefore, identical global frameworks produce very different realized trajectories.
 
 \chapter{Case Study 2: India vs USA}
-\textbf{Chapter focus.} This chapter illustrates multidimensional transition paths from the PPT: India shows rapid gains from scale-oriented social and infrastructure programs, whereas the United States shows high baseline strengths with persistent inequality and environmental pressures. The comparison reinforces that SDG trajectories are constrained by domestic political economy and sectoral trade-offs, not by income level alone \citep{sdsn2022,sachs2025}.
-
 India illustrates high marginal gains from targeted social and infrastructure policies (poverty reduction and electrification), while the United States illustrates a high baseline with persistent challenges in inequality and emissions intensity \citep{sdsn2022,sachs2025}.
 
 This comparison highlights multidimensional trade-offs: advances in one domain do not automatically translate into progress in all domains. A simple representation is:
@@ -294,8 +262,6 @@ This comparison highlights multidimensional trade-offs: advances in one domain d
 subject to fiscal, institutional, and political constraints. Countries differ in constraints and therefore follow distinct feasible SDG paths.
 
 \chapter{Final Empirical Answer}
-\textbf{Chapter focus.} This chapter synthesizes all previous evidence into a single verdict that mirrors the PPT end-state: catch-up exists, equalization is partial, and club effects are strong. By combining theory, model outputs, and case logic, it provides a consistent interpretation of why SDGs improve levels faster than they reduce inequality \citep{bigerna2025,phillips2007,sachs2025}.
-
 The combined evidence supports a balanced conclusion:
 \begin{itemize}
     \item \textbf{$\beta$-convergence:} broadly present across many goals.
@@ -313,8 +279,6 @@ Hypothesis assessment is therefore:
 These findings are consistent with both classical convergence theory and current SDG evidence \citep{barro1992,salaimartin1996,bigerna2025,phillips2007}.
 
 \chapter{Policy Implications}
-\textbf{Chapter focus.} Policy recommendations here are built directly from the convergence diagnostics. The PPT's practical message is that policy architecture must be differentiated by state capability, sectoral speed, and structural bottlenecks. Therefore, this chapter links empirical findings to financing, implementation, and monitoring priorities that can improve both progress and equalization \citep{sachs2025,sdsn2022}.
-
 Evidence implies that ``one framework'' cannot mean ``one policy design''.
 \begin{itemize}
     \item \textbf{Target lagging countries:} prioritize fragile and low-capacity states with concessional finance and technical implementation support.
@@ -326,8 +290,6 @@ Evidence implies that ``one framework'' cannot mean ``one policy design''.
 These implications align with recent SDG financing and implementation priorities \citep{sachs2025,sdsn2022}.
 
 \chapter{Conclusion}
-\textbf{Chapter focus.} The conclusion preserves the central theme: SDGs are generating progress, but not automatic parity. In line with the PPT, the report closes with a convergence-first interpretation where success is defined by narrowing dispersion as well as rising averages. The strategic takeaway is sustained, differentiated, institution-aware implementation over a long horizon \citep{sachs2025,bigerna2025}.
-
 Global SDG performance has improved, but equalization remains incomplete. The empirical structure is best summarized as ``progress with stratification'': widespread catch-up in several domains, weak reduction in aggregate inequality, and strong club dynamics.
 
 Therefore, the central policy lesson is differentiation. Countries require tailored strategies based on initial conditions, institutional capacity, and goal-specific bottlenecks. SDGs can raise development levels globally, but reducing cross-country inequality requires explicit convergence-oriented design and sustained institutional deepening \citep{sachs2025,bigerna2025,phillips2007}.
