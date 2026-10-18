@@ -62,14 +62,14 @@
 
 % Remove automatic page breaks before chapters - allow continuous flow
 %  Simple interface for the user  to customize the chapter titles
-\ProvideDocumentCommand{\abovechapterskip}{}{\vspace{12pt}}
-\ProvideDocumentCommand{\chapterbelowskip}{}{\vspace*{8pt}}
-\ProvideDocumentCommand{\chapterinbetweenskip}{}{\vspace*{20pt}}
+\ProvideDocumentCommand{\abovechapterskip}{}{\vspace{6pt}}
+\ProvideDocumentCommand{\chapterbelowskip}{}{\vspace*{4pt}}
+\ProvideDocumentCommand{\chapterinbetweenskip}{}{\vspace*{10pt}}
 \ProvideDocumentCommand{\autodot}{}{}
 \ProvideDocumentCommand{\mdtChapapp}{}{}
 \ProvideDocumentCommand{\chapteralign}{}{\raggedright}
-\ProvideDocumentCommand{\chapterfont}{}{\Huge\bfseries}
-\ProvideDocumentCommand{\chapterprefixfont}{}{\LARGE\bfseries}
+\ProvideDocumentCommand{\chapterfont}{}{\Large\bfseries}
+\ProvideDocumentCommand{\chapterprefixfont}{}{\Large\bfseries}
 \DeclareDocumentCommand{\@makechapterhead}{ m }{%
 	\abovechapterskip
 	{\parindent \z@ \chapteralign \normalfont
